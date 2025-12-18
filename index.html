@@ -294,6 +294,18 @@
             text-align: center;
         }
         
+        .video-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 4px solid #000;
+            box-shadow: 0 4px 0 #000;
+        }
+        
+        .video-container iframe {
+            display: block;
+        }
+        
         .card-content {
             background: rgba(255,255,255,0.95);
             border-radius: 8px;
@@ -581,6 +593,24 @@
     </div>
     
     <div class="container">
+        <!-- Demo Video Section -->
+        <div class="card">
+            <h2>🎬 DEMO VIDEO 🎬</h2>
+            <div class="card-content">
+                <div class="video-container">
+                    <iframe 
+                        width="100%" 
+                        height="400" 
+                        src="https://www.youtube.com/embed/eTQfZaNZx5g" 
+                        title="Super Mario Bros FPGA Demo" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        
         <!-- Pipe Divider -->
         <div class="pipe"></div>
         
