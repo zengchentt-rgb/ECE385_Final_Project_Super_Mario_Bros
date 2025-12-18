@@ -17,6 +17,11 @@
             background: #5c94fc;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background 0.5s;
+        }
+        
+        body.night-mode {
+            background: #1a1a2e;
         }
         
         /* Pixel font for titles */
@@ -41,6 +46,11 @@
             background: white;
             border-radius: 50px;
             animation: float-cloud 30s linear infinite;
+            transition: opacity 0.5s;
+        }
+        
+        body.night-mode .cloud {
+            opacity: 0.3;
         }
         
         .cloud::before, .cloud::after {
@@ -85,6 +95,95 @@
         @keyframes float-cloud {
             from { transform: translateX(0); }
             to { transform: translateX(calc(100vw + 200px)); }
+        }
+        
+        /* Twinkling Stars (Night Mode) */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        body.night-mode .stars {
+            opacity: 1;
+        }
+        
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        
+        .star:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 15%; left: 25%; animation-delay: 0.3s; }
+        .star:nth-child(3) { top: 8%; left: 45%; animation-delay: 0.6s; }
+        .star:nth-child(4) { top: 20%; left: 60%; animation-delay: 0.9s; }
+        .star:nth-child(5) { top: 12%; left: 80%; animation-delay: 1.2s; }
+        .star:nth-child(6) { top: 25%; left: 15%; animation-delay: 0.4s; }
+        .star:nth-child(7) { top: 18%; left: 35%; animation-delay: 0.7s; }
+        .star:nth-child(8) { top: 6%; left: 70%; animation-delay: 1s; }
+        .star:nth-child(9) { top: 22%; left: 90%; animation-delay: 0.2s; }
+        .star:nth-child(10) { top: 10%; left: 55%; animation-delay: 0.8s; }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        
+        /* Floating Coins */
+        .floating-coins {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .floating-coin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fbd000;
+            border-radius: 50%;
+            border: 2px solid #b87800;
+            animation: float-up 8s ease-in-out infinite;
+        }
+        
+        .floating-coin::after {
+            content: '★';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            color: #b87800;
+        }
+        
+        .floating-coin:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 7s; }
+        .floating-coin:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 9s; }
+        .floating-coin:nth-child(3) { left: 35%; animation-delay: 4s; animation-duration: 8s; }
+        .floating-coin:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 10s; }
+        .floating-coin:nth-child(5) { left: 65%; animation-delay: 3s; animation-duration: 7.5s; }
+        .floating-coin:nth-child(6) { left: 80%; animation-delay: 5s; animation-duration: 8.5s; }
+        .floating-coin:nth-child(7) { left: 92%; animation-delay: 2.5s; animation-duration: 9s; }
+        
+        @keyframes float-up {
+            0% { bottom: -30px; opacity: 0; transform: scaleX(1) rotate(0deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { bottom: 100vh; opacity: 0; transform: scaleX(0.3) rotate(360deg); }
         }
         
         /* Ground */
@@ -140,11 +239,188 @@
             z-index: 1;
         }
         
+        /* Running Mario - Authentic Pixel Art */
+        .running-mario {
+            position: fixed;
+            bottom: 52px;
+            left: -50px;
+            width: 45px;
+            height: 55px;
+            z-index: 2;
+            animation: mario-run 12s linear infinite;
+            cursor: pointer;
+            image-rendering: pixelated;
+        }
+        
+        .mario-sprite {
+            width: 4px;
+            height: 4px;
+            background: transparent;
+            box-shadow:
+                /* Hat */
+                12px 0 0 #e52521, 16px 0 0 #e52521, 20px 0 0 #e52521, 24px 0 0 #e52521, 28px 0 0 #e52521,
+                8px 4px 0 #e52521, 12px 4px 0 #e52521, 16px 4px 0 #e52521, 20px 4px 0 #e52521, 24px 4px 0 #e52521, 28px 4px 0 #e52521, 32px 4px 0 #e52521, 36px 4px 0 #e52521, 40px 4px 0 #e52521,
+                /* Hair/Forehead */
+                8px 8px 0 #6b4423, 12px 8px 0 #6b4423, 16px 8px 0 #6b4423, 20px 8px 0 #ffc8a0, 24px 8px 0 #ffc8a0, 28px 8px 0 #ffc8a0, 32px 8px 0 #6b4423, 36px 8px 0 #ffc8a0,
+                /* Face row 1 */
+                4px 12px 0 #6b4423, 8px 12px 0 #ffc8a0, 12px 12px 0 #6b4423, 16px 12px 0 #ffc8a0, 20px 12px 0 #ffc8a0, 24px 12px 0 #ffc8a0, 28px 12px 0 #6b4423, 32px 12px 0 #ffc8a0, 36px 12px 0 #ffc8a0, 40px 12px 0 #ffc8a0,
+                /* Face row 2 */
+                4px 16px 0 #6b4423, 8px 16px 0 #ffc8a0, 12px 16px 0 #6b4423, 16px 16px 0 #6b4423, 20px 16px 0 #ffc8a0, 24px 16px 0 #ffc8a0, 28px 16px 0 #ffc8a0, 32px 16px 0 #6b4423, 36px 16px 0 #ffc8a0, 40px 16px 0 #ffc8a0, 44px 16px 0 #ffc8a0,
+                /* Face row 3 */
+                4px 20px 0 #6b4423, 8px 20px 0 #6b4423, 12px 20px 0 #ffc8a0, 16px 20px 0 #ffc8a0, 20px 20px 0 #ffc8a0, 24px 20px 0 #ffc8a0, 28px 20px 0 #6b4423, 32px 20px 0 #6b4423, 36px 20px 0 #6b4423, 40px 20px 0 #6b4423,
+                /* Neck/Shirt top */
+                12px 24px 0 #ffc8a0, 16px 24px 0 #ffc8a0, 20px 24px 0 #ffc8a0, 24px 24px 0 #ffc8a0, 28px 24px 0 #ffc8a0, 32px 24px 0 #ffc8a0, 36px 24px 0 #ffc8a0,
+                /* Shirt/Overalls row 1 */
+                8px 28px 0 #e52521, 12px 28px 0 #0000e5, 16px 28px 0 #e52521, 20px 28px 0 #e52521, 24px 28px 0 #0000e5, 28px 28px 0 #0000e5, 32px 28px 0 #0000e5, 36px 28px 0 #e52521,
+                /* Shirt/Overalls row 2 */
+                4px 32px 0 #e52521, 8px 32px 0 #e52521, 12px 32px 0 #0000e5, 16px 32px 0 #e52521, 20px 32px 0 #e52521, 24px 32px 0 #ffc8a0, 28px 32px 0 #0000e5, 32px 32px 0 #e52521, 36px 32px 0 #e52521, 40px 32px 0 #e52521,
+                /* Overalls row 3 */
+                4px 36px 0 #e52521, 8px 36px 0 #e52521, 12px 36px 0 #e52521, 16px 36px 0 #0000e5, 20px 36px 0 #0000e5, 24px 36px 0 #0000e5, 28px 36px 0 #0000e5, 32px 36px 0 #e52521, 36px 36px 0 #e52521, 40px 36px 0 #e52521,
+                /* Overalls row 4 */
+                4px 40px 0 #e52521, 8px 40px 0 #e52521, 12px 40px 0 #0000e5, 16px 40px 0 #0000e5, 20px 40px 0 #0000e5, 24px 40px 0 #ffc8a0, 28px 40px 0 #0000e5, 32px 40px 0 #0000e5, 36px 40px 0 #ffc8a0,
+                /* Overalls bottom */
+                12px 44px 0 #0000e5, 16px 44px 0 #0000e5, 20px 44px 0 #0000e5, 24px 44px 0 #0000e5, 28px 44px 0 #0000e5, 32px 44px 0 #0000e5,
+                /* Legs/Shoes */
+                8px 48px 0 #6b4423, 12px 48px 0 #6b4423, 16px 48px 0 #0000e5, 28px 48px 0 #0000e5, 32px 48px 0 #6b4423, 36px 48px 0 #6b4423,
+                /* Feet */
+                4px 52px 0 #6b4423, 8px 52px 0 #6b4423, 12px 52px 0 #6b4423, 32px 52px 0 #6b4423, 36px 52px 0 #6b4423, 40px 52px 0 #6b4423;
+            transform: scale(0.8);
+        }
+        
+        @keyframes mario-run {
+            0% { left: -60px; }
+            100% { left: calc(100vw + 60px); }
+        }
+        
+        /* Mushroom Pop Animation - Pixel Art Style */
+        .mushroom-popup {
+            position: fixed;
+            bottom: 60px;
+            right: 100px;
+            width: 40px;
+            height: 45px;
+            z-index: 2;
+            animation: mushroom-pop 3s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0;
+            image-rendering: pixelated;
+        }
+        
+        .mushroom {
+            width: 4px;
+            height: 4px;
+            background: transparent;
+            box-shadow:
+                /* Cap top */
+                8px 0 0 #e52521, 12px 0 0 #e52521, 16px 0 0 #e52521, 20px 0 0 #e52521,
+                /* Cap row 2 */
+                4px 4px 0 #e52521, 8px 4px 0 #e52521, 12px 4px 0 #fff, 16px 4px 0 #e52521, 20px 4px 0 #fff, 24px 4px 0 #e52521,
+                /* Cap row 3 */
+                0 8px 0 #e52521, 4px 8px 0 #fff, 8px 8px 0 #fff, 12px 8px 0 #fff, 16px 8px 0 #e52521, 20px 8px 0 #fff, 24px 8px 0 #fff, 28px 8px 0 #e52521,
+                /* Cap row 4 */
+                0 12px 0 #e52521, 4px 12px 0 #fff, 8px 12px 0 #fff, 12px 12px 0 #fff, 16px 12px 0 #e52521, 20px 12px 0 #fff, 24px 12px 0 #fff, 28px 12px 0 #e52521,
+                /* Cap bottom */
+                4px 16px 0 #e52521, 8px 16px 0 #e52521, 12px 16px 0 #e52521, 16px 16px 0 #e52521, 20px 16px 0 #e52521, 24px 16px 0 #e52521,
+                /* Stem */
+                8px 20px 0 #f0d0a0, 12px 20px 0 #f0d0a0, 16px 20px 0 #f0d0a0, 20px 20px 0 #f0d0a0,
+                8px 24px 0 #f0d0a0, 12px 24px 0 #f0d0a0, 16px 24px 0 #f0d0a0, 20px 24px 0 #f0d0a0,
+                8px 28px 0 #f0d0a0, 12px 28px 0 #f0d0a0, 16px 28px 0 #f0d0a0, 20px 28px 0 #f0d0a0;
+            transform: scale(1.2);
+        }
+        
+        @keyframes mushroom-pop {
+            0% { transform: translateY(30px); opacity: 0; }
+            30% { transform: translateY(-10px); opacity: 1; }
+            50% { transform: translateY(0); }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Day/Night Toggle */
+        .toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .toggle-btn {
+            background: linear-gradient(135deg, #fbd000 0%, #e5a000 100%);
+            border: 3px solid #000;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.6em;
+            box-shadow: 0 3px 0 #000;
+            transition: all 0.1s;
+        }
+        
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #000;
+        }
+        
+        .toggle-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #000;
+        }
+        
+        /* Coin Counter */
+        .coin-counter {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 3px solid #fbd000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .counter-coin {
+            width: 16px;
+            height: 20px;
+            background: transparent;
+            position: relative;
+        }
+        
+        .counter-coin::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: transparent;
+            box-shadow:
+                4px 0 0 #fbd000, 8px 0 0 #fbd000,
+                0 4px 0 #fbd000, 4px 4px 0 #fff5aa, 8px 4px 0 #fbd000, 12px 4px 0 #fbd000,
+                0 8px 0 #fbd000, 4px 8px 0 #fff5aa, 8px 8px 0 #b87800, 12px 8px 0 #fbd000,
+                0 12px 0 #fbd000, 4px 12px 0 #fbd000, 8px 12px 0 #b87800, 12px 12px 0 #fbd000,
+                4px 16px 0 #fbd000, 8px 16px 0 #fbd000;
+            animation: coin-spin 0.5s steps(4) infinite;
+        }
+        
+        .counter-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7em;
+            color: white;
+        }
+        
+        @keyframes coin-spin {
+            0% { transform: scaleX(1); }
+            25% { transform: scaleX(0.5); }
+            50% { transform: scaleX(0.1); }
+            75% { transform: scaleX(0.5); }
+            100% { transform: scaleX(1); }
+        }
+        
         /* Hero Section */
         .hero {
             position: relative;
             text-align: center;
-            padding: 60px 20px 80px;
+            padding: 80px 20px 80px;
             z-index: 2;
         }
         
@@ -159,6 +435,15 @@
                 -2px 2px 0 #e52521;
             margin-bottom: 20px;
             animation: title-bounce 1s ease-in-out infinite;
+        }
+        
+        body.night-mode .hero h1 {
+            text-shadow: 
+                4px 4px 0 #000,
+                -2px -2px 0 #764ba2,
+                2px -2px 0 #764ba2,
+                -2px 2px 0 #764ba2,
+                0 0 20px #fbd000;
         }
         
         @keyframes title-bounce {
@@ -209,7 +494,8 @@
         }
         
         .q-block:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            animation: block-hit 0.3s ease-out;
         }
         
         .q-block:active {
@@ -237,6 +523,12 @@
             50% { box-shadow: inset 5px 5px 0 #fffacc, inset -3px -3px 0 #b87800; }
         }
         
+        @keyframes block-hit {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(-10px); }
+        }
+        
         /* Main Content */
         .container {
             max-width: 900px;
@@ -256,6 +548,12 @@
             position: relative;
             border: 3px solid #000;
             border-bottom: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .pipe:hover {
+            transform: scale(1.1);
         }
         
         .pipe::before {
@@ -283,6 +581,11 @@
                 inset 3px 3px 0 #f0c090,
                 inset -3px -3px 0 #8b3000,
                 8px 8px 0 rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
         }
         
         .card h2 {
@@ -353,6 +656,12 @@
             border-radius: 8px;
             border: 3px solid #000;
             color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px) rotate(-1deg);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
         }
         
         .feature h3 {
@@ -402,10 +711,19 @@
             padding: 10px 8px;
             border: 2px solid #000;
             background: white;
+            transition: background 0.2s;
+        }
+        
+        tr:hover td {
+            background: #fff5aa;
         }
         
         tr:nth-child(even) td {
             background: #f0f0f0;
+        }
+        
+        tr:nth-child(even):hover td {
+            background: #fff5aa;
         }
         
         /* Controls Section */
@@ -445,6 +763,18 @@
             text-align: center;
             border: 2px solid #000;
             box-shadow: 0 3px 0 #000;
+            transition: transform 0.1s, box-shadow 0.1s;
+            cursor: pointer;
+        }
+        
+        .key:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #000;
+        }
+        
+        .key:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #000;
         }
         
         .key-arrow {
@@ -459,6 +789,49 @@
             gap: 10px;
             margin: 8px 0;
             font-size: 0.8em;
+        }
+        
+        /* Challenges Section */
+        .challenge {
+            background: linear-gradient(135deg, #5c94fc 0%, #3060c0 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border: 3px solid #000;
+            margin-bottom: 15px;
+            color: white;
+            transition: transform 0.2s;
+        }
+        
+        .challenge:hover {
+            transform: translateX(5px);
+        }
+        
+        .challenge h4 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.6em;
+            color: #fbd000;
+            text-shadow: 1px 1px 0 #000;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .challenge p {
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+        
+        .challenge .solution {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px dashed rgba(255,255,255,0.3);
+            color: #90ff90;
+        }
+        
+        .challenge .solution::before {
+            content: "✅ Solution: ";
+            font-weight: bold;
         }
         
         /* Coin Counter Style Authors */
@@ -484,12 +857,6 @@
             border: 2px solid #b87800;
             margin-right: 5px;
             animation: coin-spin 1s linear infinite;
-        }
-        
-        @keyframes coin-spin {
-            0% { transform: scaleX(1); }
-            50% { transform: scaleX(0.3); }
-            100% { transform: scaleX(1); }
         }
         
         .authors-names {
@@ -582,17 +949,6 @@
             font-family: 'Segoe UI', sans-serif;
         }
         
-        /* Mario Character */
-        .mario {
-            position: fixed;
-            bottom: 92px;
-            left: 50px;
-            width: 32px;
-            height: 32px;
-            z-index: 2;
-            animation: mario-walk 0.4s steps(2) infinite;
-        }
-        
         /* Responsive */
         @media (max-width: 600px) {
             .hero h1 {
@@ -614,10 +970,33 @@
             .q-block span {
                 font-size: 0.35em;
             }
+            .coin-counter {
+                top: 10px;
+                left: 10px;
+                padding: 5px 10px;
+            }
+            .toggle-container {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Stars (visible in night mode) -->
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    
     <!-- Animated Clouds -->
     <div class="clouds">
         <div class="cloud cloud-1"></div>
@@ -625,9 +1004,41 @@
         <div class="cloud cloud-3"></div>
     </div>
     
+    <!-- Floating Coins -->
+    <div class="floating-coins">
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+        <div class="floating-coin"></div>
+    </div>
+    
     <!-- Ground and Bricks -->
     <div class="bricks"></div>
     <div class="ground"></div>
+    
+    <!-- Running Mario -->
+    <div class="running-mario" onclick="playSound('jump')">
+        <div class="mario-sprite"></div>
+    </div>
+    
+    <!-- Mushroom Pop -->
+    <div class="mushroom-popup">
+        <div class="mushroom"></div>
+    </div>
+    
+    <!-- Coin Counter -->
+    <div class="coin-counter">
+        <div class="counter-coin"></div>
+        <span class="counter-text">× <span id="coin-count">0</span></span>
+    </div>
+    
+    <!-- Day/Night Toggle -->
+    <div class="toggle-container">
+        <button class="toggle-btn" onclick="toggleNightMode()">🌙 NIGHT</button>
+    </div>
     
     <!-- Hero Section -->
     <div class="hero">
@@ -637,10 +1048,10 @@
         
         <!-- Question Block Badges -->
         <div class="badges">
-            <div class="q-block"><span>60 FPS</span></div>
-            <div class="q-block"><span>2 PLAYER</span></div>
-            <div class="q-block"><span>5 LEVELS</span></div>
-            <div class="q-block"><span>AUDIO</span></div>
+            <div class="q-block" onclick="addCoin()"><span>60 FPS</span></div>
+            <div class="q-block" onclick="addCoin()"><span>2 PLAYER</span></div>
+            <div class="q-block" onclick="addCoin()"><span>5 LEVELS</span></div>
+            <div class="q-block" onclick="addCoin()"><span>AUDIO</span></div>
         </div>
     </div>
     
@@ -660,7 +1071,7 @@
         </div>
         
         <!-- Pipe Divider -->
-        <div class="pipe"></div>
+        <div class="pipe" onclick="playSound('pipe')"></div>
         
         <!-- Features Card -->
         <div class="card">
@@ -708,7 +1119,7 @@
         </div>
         
         <!-- Pipe Divider -->
-        <div class="pipe"></div>
+        <div class="pipe" onclick="playSound('pipe')"></div>
         
         <!-- Enemies Card -->
         <div class="card">
@@ -750,7 +1161,7 @@
         </div>
         
         <!-- Pipe Divider -->
-        <div class="pipe"></div>
+        <div class="pipe" onclick="playSound('pipe')"></div>
         
         <!-- Controls Card -->
         <div class="card">
@@ -790,7 +1201,58 @@
         </div>
         
         <!-- Pipe Divider -->
-        <div class="pipe"></div>
+        <div class="pipe" onclick="playSound('pipe')"></div>
+        
+        <!-- Challenges Card -->
+        <div class="card">
+            <h2>🔧 CHALLENGES SOLVED 🔧</h2>
+            <div class="card-content">
+                <div class="challenge">
+                    <h4>💾 LUT Resource Constraints</h4>
+                    <p>Initial fire flower implementation exceeded FPGA LUT budget (~35,000 LUTs vs 32,600 available), causing synthesis failures.</p>
+                    <p class="solution">Removed fire flower feature, optimized enemy arrays from 10 to 3 per type, reduced level data storage, converted sprite functions to BRAM ROMs.</p>
+                </div>
+                
+                <div class="challenge">
+                    <h4>🎨 Sprite ROM Organization</h4>
+                    <p>Initial combinational logic approach for sprites caused timing failures and excessive LUT usage.</p>
+                    <p class="solution">Migrated to BRAM-based ROMs with procedural initialization, implemented 2-stage rendering pipeline to handle BRAM read latency.</p>
+                </div>
+                
+                <div class="challenge">
+                    <h4>⏱️ Clock Domain Crossing</h4>
+                    <p>Direct connection between SD card (95 MHz burst) and audio output (22 kHz continuous) caused data corruption and audio glitches.</p>
+                    <p class="solution">Implemented Xilinx FIFO Generator IP with independent clocks, added Gray code pointers for safe cross-domain synchronization.</p>
+                </div>
+                
+                <div class="challenge">
+                    <h4>💿 SD Card Initialization</h4>
+                    <p>SD cards sometimes failed CMD0 command, leaving system in undefined state with no audio playback.</p>
+                    <p class="solution">XESS controller sends 160 clock pulses before CMD0, retries ACMD41 until card leaves IDLE state, added timeout handling.</p>
+                </div>
+                
+                <div class="challenge">
+                    <h4>🔀 Mixed VHDL/SystemVerilog</h4>
+                    <p>Signal type mismatches between VHDL (std_logic) and SystemVerilog (logic) caused compilation errors.</p>
+                    <p class="solution">Created wrapper modules with explicit port matching, used common.vhd package for type definitions, careful signal width matching.</p>
+                </div>
+                
+                <div class="challenge">
+                    <h4>⌨️ Keyboard Input Timing</h4>
+                    <p>Keys registering multiple times per press, causing uncontrollable jumps and menu navigation issues.</p>
+                    <p class="solution">Implemented edge detection with prev_keycode register, only respond on rising edge of key detection, added debouncing.</p>
+                </div>
+                
+                <div class="challenge">
+                    <h4>💥 Collision Detection Bugs</h4>
+                    <p>Enemies passing through pipes, players getting stuck in platforms, inconsistent stomp detection.</p>
+                    <p class="solution">Refined AABB collision bounds, added separate checks for horizontal/vertical collisions, implemented collision priority system.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pipe Divider -->
+        <div class="pipe" onclick="playSound('pipe')"></div>
         
         <!-- Authors Card -->
         <div class="card">
@@ -825,5 +1287,162 @@
             This project is not affiliated with or endorsed by Nintendo.
         </div>
     </footer>
+    
+    <!-- Audio Elements -->
+    <audio id="coin-sound" preload="auto">
+        <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav">
+    </audio>
+    <audio id="jump-sound" preload="auto">
+        <source src="https://www.soundjay.com/button/beep-10.wav" type="audio/wav">
+    </audio>
+    <audio id="pipe-sound" preload="auto">
+        <source src="https://www.soundjay.com/button/beep-08b.wav" type="audio/wav">
+    </audio>
+    
+    <script>
+        // Coin counter
+        let coinCount = 0;
+        
+        function addCoin() {
+            coinCount++;
+            document.getElementById('coin-count').textContent = coinCount;
+            playSound('coin');
+            
+            // Create floating +100 text
+            const badge = event.target.closest('.q-block');
+            const floatText = document.createElement('div');
+            floatText.textContent = '+100';
+            floatText.style.cssText = `
+                position: absolute;
+                color: #fbd000;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 0.8em;
+                text-shadow: 2px 2px 0 #000;
+                animation: float-text 1s ease-out forwards;
+                pointer-events: none;
+                z-index: 1000;
+            `;
+            badge.appendChild(floatText);
+            setTimeout(() => floatText.remove(), 1000);
+        }
+        
+        // Add float text animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float-text {
+                0% { transform: translateY(0); opacity: 1; }
+                100% { transform: translateY(-50px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Night mode toggle
+        let isNightMode = false;
+        
+        function toggleNightMode() {
+            isNightMode = !isNightMode;
+            document.body.classList.toggle('night-mode');
+            const btn = document.querySelector('.toggle-btn');
+            btn.textContent = isNightMode ? '☀️ DAY' : '🌙 NIGHT';
+        }
+        
+        // Play sound effects
+        function playSound(type) {
+            try {
+                const audio = document.getElementById(type + '-sound');
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.volume = 0.3;
+                    audio.play().catch(() => {});
+                }
+            } catch (e) {}
+        }
+        
+        // Add hover sound to keys
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('mouseenter', () => playSound('coin'));
+        });
+        
+        // Add click to running Mario
+        document.querySelector('.running-mario').addEventListener('click', function() {
+            this.style.animation = 'none';
+            this.offsetHeight; // Trigger reflow
+            this.style.animation = 'mario-run 12s linear infinite';
+            playSound('jump');
+        });
+        
+        // Mushroom collision detection
+        const mario = document.querySelector('.running-mario');
+        const mushroom = document.querySelector('.mushroom-popup');
+        let mushroomCollected = false;
+        
+        function checkCollisions() {
+            if (!mario || !mushroom) {
+                requestAnimationFrame(checkCollisions);
+                return;
+            }
+            
+            const marioRect = mario.getBoundingClientRect();
+            const mushroomRect = mushroom.getBoundingClientRect();
+            
+            // Check if Mario touches mushroom
+            if (!mushroomCollected && 
+                marioRect.left < mushroomRect.right &&
+                marioRect.right > mushroomRect.left &&
+                marioRect.top < mushroomRect.bottom &&
+                marioRect.bottom > mushroomRect.top) {
+                collectMushroom();
+            }
+            
+            requestAnimationFrame(checkCollisions);
+        }
+        
+        // Start collision detection after page loads
+        setTimeout(() => checkCollisions(), 2000);
+        
+        function collectMushroom() {
+            if (mushroomCollected) return;
+            mushroomCollected = true;
+            
+            playSound('coin');
+            coinCount += 1000;
+            document.getElementById('coin-count').textContent = coinCount;
+            
+            // Create +1000 text
+            const floatText = document.createElement('div');
+            floatText.textContent = '+1000';
+            floatText.style.cssText = `
+                position: fixed;
+                bottom: 160px;
+                right: 100px;
+                color: #ff5050;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 1.2em;
+                text-shadow: 2px 2px 0 #000;
+                animation: float-text 1s ease-out forwards;
+                pointer-events: none;
+                z-index: 1000;
+            `;
+            document.body.appendChild(floatText);
+            setTimeout(() => floatText.remove(), 1000);
+            
+            // Hide mushroom with animation
+            mushroom.style.opacity = '0';
+            mushroom.style.transform = 'translateY(-30px) scale(1.5)';
+            mushroom.style.transition = 'all 0.3s ease-out';
+            
+            // Reset mushroom after 5 seconds
+            setTimeout(() => {
+                mushroom.style.transition = 'none';
+                mushroom.style.transform = 'translateY(0) scale(1.2)';
+                
+                setTimeout(() => {
+                    mushroom.style.transition = 'opacity 0.5s ease-out';
+                    mushroom.style.opacity = '1';
+                    mushroomCollected = false;
+                }, 100);
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
